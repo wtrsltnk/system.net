@@ -1,10 +1,6 @@
 #include <http/httplistener.h>
 #include <http/httplistenerexception.h>
 #include <iostream>
-#include <chrono>
-#include <thread>
-#include <regex>
-#include <memory>
 
 using namespace System::Net::Http;
 
