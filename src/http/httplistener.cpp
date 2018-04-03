@@ -83,49 +83,51 @@ public:
         std::string allData = readAllData();
 
         auto pos = allData.find("\r\n\r\n");
-        if (pos != std::string::npos)
+        if (pos == std::string::npos)
         {
-            std::stringstream ss;
-            ss.str(allData.substr(0, pos));
-            std::string line;
-
-            // Determine methode, uri and HTTP version
-            if (std::getline(ss, line))
-            {
-                trim(line);
-                auto first = line.find_first_of(' ');
-                auto last = line.find_last_of(' ');
-                if (first != std::string::npos && last != std::string::npos)
-                {
-                    auto version = line.substr(last);
-                    if (trim(version) != "HTTP/1.1")
-                    {
-                        throw new HttpListenerException("invalid HTTP version");
-                    }
-
-                    auto method = line.substr(0, first);
-                    this->_httpMethod = trim(method);
-
-                    auto uri = line.substr(first, last-first);
-                    this->_rawUrl = trim(uri);
-                }
-            }
-
-            // Determine headers
-            while (std::getline(ss, line))
-            {
-                auto pos = line.find_first_of(':');
-                if (pos != std::string::npos)
-                {
-                    auto key = line.substr(0, pos);
-                    auto value = line.substr(pos + 1);
-                    this->_headers.insert(std::make_pair(trim(key), trim(value)));
-                }
-            }
-
-            // And finally determine payload(if any)
-            this->_payload = allData.substr(pos + 4);
+            return;
         }
+
+        std::stringstream ss;
+        ss.str(allData.substr(0, pos));
+        std::string line;
+
+        // Determine methode, uri and HTTP version
+        if (std::getline(ss, line))
+        {
+            trim(line);
+            auto first = line.find_first_of(' ');
+            auto last = line.find_last_of(' ');
+            if (first != std::string::npos && last != std::string::npos)
+            {
+                auto version = line.substr(last);
+                if (trim(version) != "HTTP/1.1")
+                {
+                    throw new HttpListenerException("invalid HTTP version");
+                }
+
+                auto method = line.substr(0, first);
+                this->_httpMethod = trim(method);
+
+                auto uri = line.substr(first, last-first);
+                this->_rawUrl = trim(uri);
+            }
+        }
+
+        // Determine headers
+        while (std::getline(ss, line))
+        {
+            auto pos = line.find_first_of(':');
+            if (pos != std::string::npos)
+            {
+                auto key = line.substr(0, pos);
+                auto value = line.substr(pos + 1);
+                this->_headers.insert(std::make_pair(trim(key), trim(value)));
+            }
+        }
+
+        // And finally determine payload(if any)
+        this->_payload = allData.substr(pos + 4);
     }
 
     std::string ipAddress() const
@@ -141,7 +143,7 @@ class InternalHttpListenerResponse : public HttpListenerResponse
 public:
     InternalHttpListenerResponse(SOCKET socket, sockaddr_in clientInfo)
         : _socket(socket), _clientInfo(clientInfo)
-    {}
+    { }
 
     void CloseOutput()
     {
@@ -171,11 +173,13 @@ class InternalHttpListenerContext : public HttpListenerContext
     InternalHttpListenerResponse _internalResponse;
 public:
     InternalHttpListenerContext(SOCKET socket, sockaddr_in clientInfo)
-        : _internalRequest(socket, clientInfo), _internalResponse(socket, clientInfo)
+        : HttpListenerContext(), _internalRequest(socket, clientInfo), _internalResponse(socket, clientInfo)
     {
         _request = &_internalRequest;
         _response = &_internalResponse;
     }
+    virtual ~InternalHttpListenerContext()
+    { }
 };
 
 class InternalHttpListener
