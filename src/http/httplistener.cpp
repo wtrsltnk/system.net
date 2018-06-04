@@ -285,7 +285,7 @@ void HttpListener::Start()
         }
     }
 
-    if (port == "")
+    if (port == "" && schema == "http")
     {
         port = "8888";
     }
