@@ -5,16 +5,16 @@ option(HTTP_EXAMPLE "Build example programs" OFF)
 project(system.net)
 
 add_library(system.net
-    src/http/httplistener.cpp
-    include/http/httplistener.h
-    src/http/httplistenercontext.cpp
-    include/http/httplistenercontext.h
-    src/http/httplistenerresponse.cpp
-    include/http/httplistenerresponse.h
-    src/http/httplistenerrequest.cpp
-    include/http/httplistenerrequest.h
-    src/http/httplistenerexception.cpp
-    include/http/httplistenerexception.h
+    src/http/HttpListener.cpp
+    include/http/HttpListener.h
+    src/http/HttpListenerContext.cpp
+    include/http/HttpListenerContext.h
+    src/http/HttpListenerResponse.cpp
+    include/http/HttpListenerResponse.h
+    src/http/HttpListenerRequest.cpp
+    include/http/HttpListenerRequest.h
+    src/http/HttpListenerException.cpp
+    include/http/HttpListenerException.h
     )
 
 target_compile_features(system.net
