@@ -1,2 +1,0 @@
-C:\Qt\Tools\mingw530_32\bin\ar.exe qc libsystem.net.a  CMakeFiles/system.net.dir/src/http/HttpListener.cpp.obj CMakeFiles/system.net.dir/src/http/HttpListenerContext.cpp.obj CMakeFiles/system.net.dir/src/http/HttpListenerResponse.cpp.obj CMakeFiles/system.net.dir/src/http/HttpListenerRequest.cpp.obj CMakeFiles/system.net.dir/src/http/HttpListenerException.cpp.obj
-C:\Qt\Tools\mingw530_32\bin\ranlib.exe libsystem.net.a

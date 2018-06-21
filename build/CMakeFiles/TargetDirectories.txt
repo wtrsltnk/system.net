@@ -1,3 +1,0 @@
-C:/Code/small-apps/system.net/build/CMakeFiles/system.net.dir
-C:/Code/small-apps/system.net/build/CMakeFiles/edit_cache.dir
-C:/Code/small-apps/system.net/build/CMakeFiles/rebuild_cache.dir
