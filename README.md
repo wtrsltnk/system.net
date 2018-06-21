@@ -5,8 +5,8 @@ Partial c++ implementation of .NET System.Net classes
 ## Example Hello World
 
 ```c++
-#include <http/httplistener.h>
-#include <http/httplistenerexception.h>
+#include <system.net/httplistener.h>
+#include <system.net/httplistenerexception.h>
 #include <iostream>
 
 using namespace System::Net::Http;
@@ -43,8 +43,8 @@ int main(int argc, char* argv[])
 ## Example Redirect
 
 ```c++
-#include <http/httplistener.h>
-#include <http/httplistenerexception.h>
+#include <system.net/httplistener.h>
+#include <system.net/httplistenerexception.h>
 #include <iostream>
 
 using namespace System::Net::Http;
