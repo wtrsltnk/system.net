@@ -5,7 +5,7 @@
 #include <sstream>
 #include <map>
 
-#include "httplistenerrequest.h"
+#include <system.net/system.net.httplistenerrequest.h>
 
 namespace System
 {

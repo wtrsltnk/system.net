@@ -1,8 +1,8 @@
 #ifndef HTTPLISTENERCONTEXT_H
 #define HTTPLISTENERCONTEXT_H
 
-#include "httplistenerresponse.h"
-#include "httplistenerrequest.h"
+#include <system.net/system.net.httplistenerresponse.h>
+#include <system.net/system.net.httplistenerrequest.h>
 
 namespace System
 {

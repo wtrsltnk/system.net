@@ -1,5 +1,5 @@
-#include <system.net/httplistener.h>
-#include <system.net/httplistenerexception.h>
+#include <system.net/system.net.httplistener.h>
+#include <system.net/system.net.httplistenerexception.h>
 #include <iostream>
 
 using namespace System::Net::Http;
