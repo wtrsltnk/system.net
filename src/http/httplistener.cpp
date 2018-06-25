@@ -1,17 +1,17 @@
-#include <system.net/system.net.httplistener.h>
-#include <system.net/system.net.httplistenerexception.h>
+#include <algorithm>
+#include <iostream>
+#include <regex>
+#include <sstream>
+#include <string>
+#include <system.net/system.net.http.httplistener.h>
+#include <system.net/system.net.http.httplistenerexception.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#include <string>
-#include <algorithm>
-#include <sstream>
-#include <regex>
-#include <iostream>
 
 using namespace System::Net::Http;
 
 // Global Functions
-std::string  ToString(int data)
+std::string ToString(int data)
 {
     std::stringstream buffer;
     buffer << data;
@@ -19,47 +19,47 @@ std::string  ToString(int data)
 }
 
 // trim from start
-static inline std::string &ltrim(std::string &s) {
+static inline std::string &ltrim(std::string &s)
+{
     s.erase(s.begin(), std::find_if(s.begin(), s.end(),
                                     std::not1(std::ptr_fun<int, int>(std::isspace))));
     return s;
 }
 
 // trim from end
-static inline std::string &rtrim(std::string &s) {
+static inline std::string &rtrim(std::string &s)
+{
     s.erase(std::find_if(s.rbegin(), s.rend(),
-                         std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+                         std::not1(std::ptr_fun<int, int>(std::isspace)))
+                .base(),
+            s.end());
     return s;
 }
 
 // trim from both ends
-static inline std::string &trim(std::string &s) {
+static inline std::string &trim(std::string &s)
+{
     return ltrim(rtrim(s));
 }
 
-namespace System
-{
+namespace System {
+namespace Net {
+namespace Http {
 
-namespace Net
-{
-
-namespace Http
-{
-
-#define BUFFER_SIZE 1024*5 // 5KB
+#define HTTP_BUFFER_SIZE 1024 * 5 // 5KB
 
 class InternalHttpListenerRequest : public HttpListenerRequest
 {
     SOCKET _socket;
     sockaddr_in _clientInfo;
-    char buffer[BUFFER_SIZE+1];
+    char buffer[HTTP_BUFFER_SIZE + 1];
     int bytes;
 
     std::string readAllData()
     {
         ZeroMemory(&buffer, sizeof(buffer));
 
-        bytes = recv(_socket, buffer, BUFFER_SIZE, 0);
+        bytes = recv(_socket, buffer, HTTP_BUFFER_SIZE, 0);
         if (bytes < 0)
         {
             throw new HttpListenerException("Could not recieve any data");
@@ -67,15 +67,16 @@ class InternalHttpListenerRequest : public HttpListenerRequest
         buffer[bytes] = '\0';
         std::string browserData = buffer;
 
-        while (BUFFER_SIZE == bytes)
+        while (HTTP_BUFFER_SIZE == bytes)
         {
-            bytes = recv(_socket, buffer, BUFFER_SIZE, 0);
+            bytes = recv(_socket, buffer, HTTP_BUFFER_SIZE, 0);
             buffer[bytes] = '\0';
             browserData += buffer;
         }
 
         return browserData;
     }
+
 public:
     InternalHttpListenerRequest(SOCKET socket, sockaddr_in clientInfo)
         : _socket(socket), _clientInfo(clientInfo)
@@ -109,7 +110,7 @@ public:
                 auto method = line.substr(0, first);
                 this->_httpMethod = trim(method);
 
-                auto uri = line.substr(first, last-first);
+                auto uri = line.substr(first, last - first);
                 this->_rawUrl = trim(uri);
             }
         }
@@ -140,10 +141,11 @@ class InternalHttpListenerResponse : public HttpListenerResponse
 {
     SOCKET _socket;
     sockaddr_in _clientInfo;
+
 public:
     InternalHttpListenerResponse(SOCKET socket, sockaddr_in clientInfo)
         : _socket(socket), _clientInfo(clientInfo)
-    { }
+    {}
 
     void CloseOutput()
     {
@@ -171,6 +173,7 @@ class InternalHttpListenerContext : public HttpListenerContext
 {
     InternalHttpListenerRequest _internalRequest;
     InternalHttpListenerResponse _internalResponse;
+
 public:
     InternalHttpListenerContext(SOCKET socket, sockaddr_in clientInfo)
         : HttpListenerContext(), _internalRequest(socket, clientInfo), _internalResponse(socket, clientInfo)
@@ -179,7 +182,7 @@ public:
         _response = &_internalResponse;
     }
     virtual ~InternalHttpListenerContext()
-    { }
+    {}
 };
 
 class InternalHttpListener
@@ -191,19 +194,17 @@ public:
 
     InternalHttpListener()
         : _listeningSocket(0), _maxConnections(50)
-    { }
+    {}
 };
 
-}
-
-}
-
-}
+} // namespace Http
+} // namespace Net
+} // namespace System
 
 HttpListener::HttpListener()
     : _internal(new InternalHttpListener())
 {
-    WORD socketVersion = MAKEWORD(2,2);
+    WORD socketVersion = MAKEWORD(2, 2);
     WSADATA wsaData;
 
     auto resultCode = WSAStartup(socketVersion, &wsaData);
@@ -234,11 +235,11 @@ HttpListenerPrefixCollection &HttpListener::Prefixes()
 
 // Shuts down the HttpListener object immediately, discarding all currently queued requests.
 void HttpListener::Abort()
-{ }
+{}
 
 // Shuts down the HttpListener.
 void HttpListener::Close()
-{ }
+{}
 
 // Allows this instance to receive incoming requests.
 void HttpListener::Start()
@@ -257,7 +258,7 @@ void HttpListener::Start()
     {
         std::smatch matches;
 
-        if(std::regex_search(prefix, matches, rgx))
+        if (std::regex_search(prefix, matches, rgx))
         {
             auto prefixSchema = matches[1].str();
             if (prefixSchema != "")
@@ -336,7 +337,7 @@ HttpListenerContext *HttpListener::GetContext()
     sockaddr_in clientInfo;
     int clientInfoSize = sizeof(clientInfo);
 
-    auto socket = accept(_internal->_listeningSocket, (sockaddr*)&clientInfo, &clientInfoSize);
+    auto socket = accept(_internal->_listeningSocket, (sockaddr *)&clientInfo, &clientInfoSize);
 
     if (INVALID_SOCKET == socket)
     {

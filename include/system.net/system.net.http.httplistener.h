@@ -1,18 +1,13 @@
-#ifndef HTTPLISTENER_H
-#define HTTPLISTENER_H
+#ifndef _SYSTEM_NET_HTTP_HTTPLISTENER_H_
+#define _SYSTEM_NET_HTTP_HTTPLISTENER_H_
 
-#include <system.net/system.net.httplistenercontext.h>
-#include <vector>
 #include <string>
+#include <system.net/system.net.http.httplistenercontext.h>
+#include <vector>
 
-namespace System
-{
-
-namespace Net
-{
-
-namespace Http
-{
+namespace System {
+namespace Net {
+namespace Http {
 
 typedef std::vector<std::string> HttpListenerPrefixCollection;
 
@@ -50,10 +45,8 @@ public:
     void Stop();
 };
 
-}
+} // namespace Http
+} // namespace Net
+} // namespace System
 
-}
-
-}
-
-#endif // HTTPLISTENER_H
+#endif // _SYSTEM_NET_HTTP_HTTPLISTENER_H_

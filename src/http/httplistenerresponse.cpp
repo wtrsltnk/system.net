@@ -1,12 +1,12 @@
-#include <system.net/system.net.httplistenerresponse.h>
+#include <system.net/system.net.http.httplistenerresponse.h>
 
 using namespace System::Net::Http;
 
 HttpListenerResponse::HttpListenerResponse()
     : _statusCode(200), _statusDescription("OK")
-{ }
+{}
 
-HttpListenerResponse::~HttpListenerResponse() { }
+HttpListenerResponse::~HttpListenerResponse() {}
 
 // Gets or sets the MIME type of the content returned.
 std::string const &HttpListenerResponse::ContentType() const

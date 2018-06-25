@@ -1,21 +1,14 @@
-#ifndef HTTPREQUEST_H
-#define HTTPREQUEST_H
+#ifndef _SYSTEM_NET_HTTP_HTTPREQUEST_H_
+#define _SYSTEM_NET_HTTP_HTTPREQUEST_H_
 
-#include <winsock2.h>
 #include <functional>
-#include <string>
 #include <map>
+#include <string>
+#include <winsock2.h>
 
-#define BUFFER_SIZE 1024*5 // 5KB
-
-namespace System
-{
-
-namespace Net
-{
-
-namespace Http
-{
+namespace System {
+namespace Net {
+namespace Http {
 
 class HttpListenerRequest
 {
@@ -54,10 +47,8 @@ public:
     std::string ipAddress() const;
 };
 
-}
+} // namespace Http
+} // namespace Net
+} // namespace System
 
-}
-
-}
-
-#endif // HTTPREQUEST_H
+#endif // _SYSTEM_NET_HTTP_HTTPREQUEST_H_

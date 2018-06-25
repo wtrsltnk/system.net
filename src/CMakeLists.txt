@@ -1,15 +1,15 @@
 
 add_library(system.net
     http/HttpListener.cpp
-    ../include/system.net/system.net.httplistener.h
+    ../include/system.net/system.net.http.httplistener.h
     http/HttpListenerContext.cpp
-    ../include/system.net/system.net.httplistenercontext.h
+    ../include/system.net/system.net.http.httplistenercontext.h
     http/HttpListenerResponse.cpp
-    ../include/system.net/system.net.httplistenerresponse.h
+    ../include/system.net/system.net.http.httplistenerresponse.h
     http/HttpListenerRequest.cpp
-    ../include/system.net/system.net.httplistenerrequest.h
+    ../include/system.net/system.net.http.httplistenerrequest.h
     http/HttpListenerException.cpp
-    ../include/system.net/system.net.httplistenerexception.h
+    ../include/system.net/system.net.http.httplistenerexception.h
     )
 
 target_compile_features(system.net
@@ -37,11 +37,11 @@ install(
 
 install(
     FILES
-        ${system.net_SOURCE_DIR}/include/system.net/system.net.httplistener.h
-        ${system.net_SOURCE_DIR}/include/system.net/system.net.httplistenercontext.h
-        ${system.net_SOURCE_DIR}/include/system.net/system.net.httplistenerexception.h
-        ${system.net_SOURCE_DIR}/include/system.net/system.net.httplistenerrequest.h
-        ${system.net_SOURCE_DIR}/include/system.net/system.net.httplistenerresponse.h
+        ${system.net_SOURCE_DIR}/include/system.net/system.net.http.httplistener.h
+        ${system.net_SOURCE_DIR}/include/system.net/system.net.http.httplistenercontext.h
+        ${system.net_SOURCE_DIR}/include/system.net/system.net.http.httplistenerexception.h
+        ${system.net_SOURCE_DIR}/include/system.net/system.net.http.httplistenerrequest.h
+        ${system.net_SOURCE_DIR}/include/system.net/system.net.http.httplistenerresponse.h
     DESTINATION
         "include/system.net"
     )

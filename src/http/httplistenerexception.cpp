@@ -1,10 +1,10 @@
-#include <system.net/system.net.httplistenerexception.h>
+#include <system.net/system.net.http.httplistenerexception.h>
 
 using namespace System::Net::Http;
 
 HttpListenerException::HttpListenerException(std::string const &message)
     : _message(message)
-{ }
+{}
 
 std::string const &HttpListenerException::Message() const
 {

@@ -1,10 +1,10 @@
-#include <system.net/system.net.httplistener.h>
-#include <system.net/system.net.httplistenerexception.h>
 #include <iostream>
+#include <system.net/system.net.http.httplistener.h>
+#include <system.net/system.net.http.httplistenerexception.h>
 
 using namespace System::Net::Http;
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     HttpListener listener;
 
@@ -22,8 +22,7 @@ int main(int argc, char* argv[])
         delete context;
 
         listener.Stop();
-    }
-    catch (HttpListenerException const *ex)
+    } catch (HttpListenerException const *ex)
     {
         std::cout << "Exception in http listener: " << ex->Message() << "\n";
     }

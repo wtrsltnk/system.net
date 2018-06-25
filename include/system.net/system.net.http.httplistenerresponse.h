@@ -1,20 +1,15 @@
-#ifndef HTTPRESPONSE_H
-#define HTTPRESPONSE_H
+#ifndef _SYSTEM_NET_HTTP_HTTPRESPONSE_H_
+#define _SYSTEM_NET_HTTP_HTTPRESPONSE_H_
 
-#include <string>
-#include <sstream>
 #include <map>
+#include <sstream>
+#include <string>
 
-#include <system.net/system.net.httplistenerrequest.h>
+#include <system.net/system.net.http.httplistenerrequest.h>
 
-namespace System
-{
-
-namespace Net
-{
-
-namespace Http
-{
+namespace System {
+namespace Net {
+namespace Http {
 
 class HttpListenerResponse
 {
@@ -60,10 +55,8 @@ public:
     virtual void CloseOutput() = 0;
 };
 
-}
+} // namespace Http
+} // namespace Net
+} // namespace System
 
-}
-
-}
-
-#endif // HTTPRESPONSE_H
+#endif // _SYSTEM_NET_HTTP_HTTPRESPONSE_H_

@@ -1,15 +1,15 @@
-#include <system.net/system.net.httplistenerrequest.h>
-#include <system.net/system.net.httplistenerresponse.h>
 #include <algorithm>
-#include <sstream>
-#include <iostream>
-#include <fstream>
 #include <cctype>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <system.net/system.net.http.httplistenerrequest.h>
+#include <system.net/system.net.http.httplistenerresponse.h>
 
 using namespace System::Net::Http;
 
 HttpListenerRequest::HttpListenerRequest()
-{ }
+{}
 
 // Gets the length of the body data included in the request.
 long HttpListenerRequest::ContentLength64() const

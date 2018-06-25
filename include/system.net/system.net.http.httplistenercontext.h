@@ -1,17 +1,12 @@
-#ifndef HTTPLISTENERCONTEXT_H
-#define HTTPLISTENERCONTEXT_H
+#ifndef _SYSTEM_NET_HTTP_HTTPLISTENERCONTEXT_H_
+#define _SYSTEM_NET_HTTP_HTTPLISTENERCONTEXT_H_
 
-#include <system.net/system.net.httplistenerresponse.h>
-#include <system.net/system.net.httplistenerrequest.h>
+#include <system.net/system.net.http.httplistenerrequest.h>
+#include <system.net/system.net.http.httplistenerresponse.h>
 
-namespace System
-{
-
-namespace Net
-{
-
-namespace Http
-{
+namespace System {
+namespace Net {
+namespace Http {
 
 class HttpListenerContext
 {
@@ -33,10 +28,8 @@ public:
     // IPrincipal &User();
 };
 
-}
+} // namespace Http
+} // namespace Net
+} // namespace System
 
-}
-
-}
-
-#endif // HTTPLISTENERCONTEXT_H
+#endif // _SYSTEM_NET_HTTP_HTTPLISTENERCONTEXT_H_
