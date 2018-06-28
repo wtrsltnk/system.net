@@ -1,15 +1,10 @@
 
 add_library(system.net
     http/HttpListener.cpp
-    ../include/system.net/system.net.http.httplistener.h
     http/HttpListenerContext.cpp
-    ../include/system.net/system.net.http.httplistenercontext.h
     http/HttpListenerResponse.cpp
-    ../include/system.net/system.net.http.httplistenerresponse.h
     http/HttpListenerRequest.cpp
-    ../include/system.net/system.net.http.httplistenerrequest.h
     http/HttpListenerException.cpp
-    ../include/system.net/system.net.http.httplistenerexception.h
     )
 
 target_compile_features(system.net

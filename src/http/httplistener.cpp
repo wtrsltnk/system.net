@@ -162,7 +162,7 @@ public:
                 << "\r\n";
 
         send(_socket, headers.str().c_str(), headers.str().size(), 0);
-        send(_socket, _output.c_str(), _output.size(), 0);
+        send(_socket, _output.data(), _output.size(), 0);
 
         shutdown(_socket, SD_BOTH);
         closesocket(_socket);

@@ -62,7 +62,12 @@ void HttpListenerResponse::Redirect(std::string const &url)
     CloseOutput();
 }
 
+void HttpListenerResponse::WriteOutput(std::vector<char> const &data)
+{
+    _output.insert(_output.end(), data.begin(), data.end());
+}
+
 void HttpListenerResponse::WriteOutput(std::string const &data)
 {
-    _output += data;
+    _output.insert(_output.end(), data.begin(), data.end());
 }

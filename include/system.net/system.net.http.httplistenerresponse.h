@@ -4,6 +4,7 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include <vector>
 
 #include <system.net/system.net.http.httplistenerrequest.h>
 
@@ -50,6 +51,7 @@ public:
     // Configures the response to redirect the client to the specified URL.
     void Redirect(std::string const &url);
 
+    void WriteOutput(std::vector<char> const &data);
     void WriteOutput(std::string const &data);
 
     virtual void CloseOutput() = 0;
