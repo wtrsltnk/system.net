@@ -18,7 +18,7 @@ target_include_directories(system.net
     PUBLIC
         $<INSTALL_INTERFACE:include>
     PRIVATE
-        ../include
+        include
     )
 
 install(
