@@ -16,7 +16,7 @@ target_compile_features(system.net
 
 target_include_directories(system.net
     PUBLIC
-        $<INSTALL_INTERFACE:include>
+        $<INSTALL_INTERFACE:../include>
     PRIVATE
         ../include
     )
