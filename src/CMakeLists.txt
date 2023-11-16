@@ -16,7 +16,7 @@ target_compile_features(system.net
 
 target_include_directories(system.net
     PUBLIC
-        $<INSTALL_INTERFACE:../include>
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
     PRIVATE
         ../include
     )
