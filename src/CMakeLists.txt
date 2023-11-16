@@ -5,6 +5,11 @@ add_library(system.net
     http/HttpListenerResponse.cpp
     http/HttpListenerRequest.cpp
     http/HttpListenerException.cpp
+    ../include/system.net/system.net.http.httplistener.h
+    ../include/system.net/system.net.http.httplistenercontext.h
+    ../include/system.net/system.net.http.httplistenerexception.h
+    ../include/system.net/system.net.http.httplistenerrequest.h
+    ../include/system.net/system.net.http.httplistenerresponse.h
     )
 
 target_compile_features(system.net
